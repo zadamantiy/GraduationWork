@@ -1,0 +1,6 @@
+C:\Users\Zadamantiy\source\repos\AE_ClusterCrack\AE_ClusterCrackLib\bin\Release\AE_ClusterCrackLib.dll
+C:\Users\Zadamantiy\source\repos\AE_ClusterCrack\AE_ClusterCrackLib\bin\Release\AE_ClusterCrackLib.pdb
+C:\Users\Zadamantiy\source\repos\AE_ClusterCrack\AE_ClusterCrackLib\obj\Release\AE_ClusterCrackLib.csprojAssemblyReference.cache
+C:\Users\Zadamantiy\source\repos\AE_ClusterCrack\AE_ClusterCrackLib\obj\Release\AE_ClusterCrackLib.csproj.CoreCompileInputs.cache
+C:\Users\Zadamantiy\source\repos\AE_ClusterCrack\AE_ClusterCrackLib\obj\Release\AE_ClusterCrackLib.dll
+C:\Users\Zadamantiy\source\repos\AE_ClusterCrack\AE_ClusterCrackLib\obj\Release\AE_ClusterCrackLib.pdb
