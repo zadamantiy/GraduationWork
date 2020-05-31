@@ -20,7 +20,7 @@ namespace AE_ClusterCrackLib.AeDbscanClustering
         public double R;
 
 
-        private readonly double _density;
+        private readonly int _density;
         public double Density => _density - 1;
 
         private readonly int _cellSize;
@@ -70,6 +70,7 @@ namespace AE_ClusterCrackLib.AeDbscanClustering
             var inputPointCluster = inputPoint.GetCurrentCluster();
             if (inputPointCluster == null)
             {
+                ClusterCount++;
                 inputPointCluster = new AeDbscanCluster(++CurrentClusterId);
                 inputPoint.MoveToCluster(PointCount, inputPointCluster);
             }
@@ -91,12 +92,13 @@ namespace AE_ClusterCrackLib.AeDbscanClustering
             //AddPoint(inputPoint);
             //var newCluster = new AeDbscanCluster();
             //inputPoint.MoveToCluster(PointCount, newCluster);
-            ClusterCount++;
-
             var cells = GetNearestCells(inputPoint);
 
             if (_density == 0)
+            { 
                 inputPoint.MoveToCluster(PointCount, new AeDbscanCluster(++CurrentClusterId));
+                ClusterCount++;
+            }
 
             foreach (var cellPointer in cells)
             {
@@ -130,6 +132,12 @@ namespace AE_ClusterCrackLib.AeDbscanClustering
                         {
                             UnionClusters(inputPointCluster, anotherPointCluster);
                         }
+
+                        var inputCloseCount = inputPoint.AddClosePoint(anotherPoint);
+                        if (inputCloseCount >= _density)
+                        {
+                            UnionClosePoints(inputPoint);
+                        }
                     }
                     else if (inputPoint.IsCore && !anotherPoint.IsCore)
                     {
@@ -140,6 +148,12 @@ namespace AE_ClusterCrackLib.AeDbscanClustering
                         else
                         {
                             UnionClusters(inputPointCluster, anotherPointCluster);
+                        }
+
+                        var anotherCloseCount = anotherPoint.AddClosePoint(inputPoint);
+                        if (anotherCloseCount >= _density)
+                        {
+                            UnionClosePoints(anotherPoint);
                         }
                     }
                     else
@@ -248,7 +262,7 @@ namespace AE_ClusterCrackLib.AeDbscanClustering
             _cells[pt].Add(point);
         }
 
-        public AeDbscanClusterField(double r, double density)
+        public AeDbscanClusterField(double r, int density)
         {
             PointCount = 0;
             ClusterCount = 0;
